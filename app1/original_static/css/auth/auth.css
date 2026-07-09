@@ -1,0 +1,59 @@
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+:root {
+    --charcoal: #264653;
+    --persian-green: #2a9d8f;
+    --maize-crayola: #e9c46a;
+    --sandy-brown: #f4a261;
+    --burnt-sienna: #e76f51;
+}
+
+.form-custom{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-custom__inner{
+    max-width: 600px;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 4px;
+    box-shadow: 5px 5px 76px -9px rgb(34 60 80 / 19%);
+}
+
+.form-custom__inner label{
+    width: 100%;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-custom__inner input:not([type="submit"]){
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.form-custom__inner input[type="submit"]{
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color, border, color 0.2s;
+    text-decoration: none;
+    background-color: var(--burnt-sienna);
+    border-color: var(--burnt-sienna);
+    color: white;
+}

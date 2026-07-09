@@ -1,0 +1,223 @@
+    .footer {
+        font-family: "Open Sans", sans-serif;
+        background: #263f49;
+        color: #fff;
+        font-size: 14px;
+    }
+    
+    .footer__container {
+        padding: 30px 0 30px 0;
+        margin: 0 20px;
+    }
+    
+    .footer__block {
+        margin: 20px 0 30px 0;
+        background: white;
+        color: #2f4d5a;
+        border-top: 4px solid #67b0d1;
+        text-align: center;
+        padding: 30px 20px;
+    }
+    
+    .footer__block-title {
+        font-family: "Raleway", sans-serif;
+        font-size: 24px;
+        margin: 0 0 20px 0;
+        padding: 2px 0 2px 0;
+        line-height: 1;
+        font-weight: 700;
+    }
+    
+    .footer__block-text {
+        font-size: 14px;
+        line-height: 24px;
+        margin-bottom: 10px;
+        font-family: "Raleway", sans-serif;
+    }
+    
+    .footer__block-address {
+        font-size: 14px;
+        line-height: 24px;
+        font-family: "Raleway", sans-serif;
+        margin: 0 auto;
+        max-width: 200px;
+    }
+    
+    .footer__block-phone {
+        font-size: 14px;
+        line-height: 24px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        font-family: "Raleway", sans-serif;
+    }
+    
+    .footer__block-email {
+        font-size: 14px;
+        line-height: 24px;
+        margin-bottom: 0;
+        font-family: "Raleway", sans-serif;
+    }
+    
+    .footer__list {
+        margin-bottom: 30px;
+    }
+    
+    .footer__list-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        position: relative;
+        padding-bottom: 12px;
+    }
+    
+    .list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .list__item {
+        padding: 10px 0;
+        display: flex;
+        font-size: 15px;
+        color: #fff;
+        transition: 0.3s;
+        line-height: 1;
+    }
+    
+    .list__item i {
+        padding-right: 2px;
+        color: #b5d9e9;
+        font-size: 18px;
+        line-height: 1;
+    }
+    
+    .list__item-link {
+        transition: all 0.3s ease 0s;
+        text-decoration: none;
+    }
+    
+    .list__item-link:hover {
+        color: #63b1d4;
+    }
+    
+    .news {
+        width: 100%;
+    }
+    
+    .news__title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        position: relative;
+        padding-bottom: 12px;
+    }
+    
+    
+    .news__text-link{
+        text-decoration: none;
+        color: #b5d9e9;
+    }
+
+    .news__text-link:hover{
+        cursor: pointer;
+    }
+
+    .news__text {
+        margin-bottom: 16px;
+        font-size: 14px;
+        color: white;
+    }
+    
+    .news__form {
+        margin-top: 20px;
+        background: #fff;
+        padding: 6px 10px;
+        position: relative;
+        margin-bottom: 70px;
+    }
+    
+    .news__input-form {
+        border: 0;
+        padding: 4px;
+        width: 100%;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+    
+    .news__input-button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        border: 0;
+        font-size: 16px;
+        padding: 0 20px;
+        background: #67b0d1;
+        color: #fff;
+        transition: 0.3s;
+    }
+    
+    .news__input-button:hover {
+        cursor: pointer;
+        background: #4b9ec5;
+    }
+    
+    .footer__down {
+        padding: 30px 0;
+        border-top: 1px solid #385b6b;
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .footer__down-text {
+        margin-top: 20px;
+    }
+    
+    @media screen and (min-width: 576px) {
+        .footer__block {
+            margin-top: -50px;
+        }
+    }
+    
+    @media screen and (min-width: 768px) {
+        .footer__container {
+            display: grid;
+            gap: 30px;
+        }
+        .footer__list {
+            margin-bottom: 0;
+        }
+    }
+    
+    @media screen and (min-width: 1024px) {
+        .footer__container {
+            padding-top: 50px;
+            margin: 0 30px;
+            display: flex;
+            gap: 10px;
+        }
+        .footer__block {
+            margin-top: -80px;
+            width: 33.33333333%;
+        }
+        .footer__list {
+            width: 16.66666667%;
+        }
+        .list__item {
+            padding: 5px;
+        }
+        .news {
+            width: 33.33333333%;
+            ;
+        }
+    }
+    
+    @media screen and (min-width: 1400px) {
+        .footer__container {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+    }

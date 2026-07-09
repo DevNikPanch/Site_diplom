@@ -1,0 +1,148 @@
+.advantages {
+    background-size: cover;
+    padding: 60px 0;
+    position: relative;
+    text-align: center;
+}
+
+.advantages::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.advantages__container {
+    position: relative;
+    z-index: 10;
+}
+
+.advantages__info {
+    padding: 60px 0;
+}
+
+.advantages__info-title {
+    margin-top: 30px;
+    font-weight: 700;
+    font-size: 34px;
+    color: #2f4d5a;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.advantages__info-text {
+    max-width: 390px;
+    margin: 0 auto;
+    font-size: 18px;
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 30px;
+}
+
+.bx {
+    font-family: boxicons;
+    font-weight: 400;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+    display: inline-block;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+i {
+    font-size: 40px;
+    color: #67b0d1;
+    margin-bottom: 10px;
+}
+
+.advantages__info-button {
+    width: 100%;
+}
+
+.button-about {
+    text-decoration: none;
+    border-style: none;
+    display: inline-block;
+    background: #67b0d1;
+    padding: 8px 44px 8px 30px;
+    color: #fff;
+    border-radius: 50px;
+    transition: 0.3s;
+    position: relative;
+}
+
+.button-about:hover {
+    background: #7bbad7;
+}
+
+.button-about i {
+    color: white;
+    font-size: 18px;
+    position: absolute;
+    right: 18px;
+    top: 8px;
+}
+
+.advantages__block {
+    margin-top: 40px;
+}
+
+.advantages__block-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+}
+
+.advantages__block-text {
+    margin: 0 auto;
+    font-size: 16px;
+    color: #848484;
+    max-width: 350px;
+}
+
+@media screen and (min-width: 768px) {
+    .advantages__info-text {
+        max-width: 100%;
+    }
+    .advantages__blocks {
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .advantages__container {
+        margin: 0 30px;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .advantages__container {
+        max-width: 1320px;
+        margin: 0 auto;
+        display: flex;
+        gap: 10px;
+    }
+    .advantages__info-text {
+        text-align: left;
+        max-width: 450px;
+        font-size: 16px;
+    }
+    .advantages__info-title {
+        text-align: left;
+    }
+    .advantages__blocks {
+        margin: 0;
+    }
+    .advantages__block {
+        text-align: start;
+        margin-left: 30px;
+    }
+}

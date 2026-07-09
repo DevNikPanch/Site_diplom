@@ -1,0 +1,19 @@
+.idea/
+.vscode/
+static/
+order/
+media/
+db.sqlite3
+######## Use this To STOP/START trackig configs
+# git update-index --assume-unchanged AdvantShop.Web/Web.ModeSettings.config
+# git update-index --assume-unchanged AdvantShop.Web/Web.ConnectionString.config
+# git update-index --assume-unchanged Tests/AdvantShop.Web.Site.Selenium.Test/app.config
+
+# git update-index --no-assume-unchanged AdvantShop.Web/Web.ModeSettings.config
+# git update-index --no-assume-unchanged AdvantShop.Web/Web.ConnectionString.config
+# git update-index --no-assume-unchanged Tests/AdvantShop.Web.Site.Selenium.Test/app.config
+
+
+
+
+

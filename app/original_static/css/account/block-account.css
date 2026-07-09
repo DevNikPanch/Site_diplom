@@ -1,0 +1,850 @@
+:root {
+    --blue: #67b0d1;
+    --charcoal: #264653;
+    --persian-green: #2a9d8f;
+    --maize-crayola: #e9c46a;
+    --sandy-brown: #f4a261;
+    --burnt-sienna: #e76f51;
+}
+
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.container__navigation {
+    display: flex;
+}
+
+.container__title {
+    margin: 0 0 20px 0;
+
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.container__text {
+    max-width: 1100px;
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+.account {
+    padding: 100px 0;
+    background-color: #efefef;
+    line-height: 1.5;
+}
+
+.account__content {
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.container__info {
+    padding: 50px 0 5px 0;
+    font-weight: 700;
+    font-size: 30px;
+    border-bottom: 1px solid #9ec1d0;
+}
+
+.form {
+    max-width: 1100px;
+    font-size: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+}
+
+.form__text {
+    font-weight: 700;
+}
+
+.form__text-one {
+    display: none;
+}
+
+#id_type_request_0:checked~.form__text-one {
+    display: block;
+}
+
+.form__text-two {
+    display: none;
+}
+
+#id_type_request_1:checked~.form__text-two {
+    display: block;
+}
+
+.label-class {
+    margin-left: -10px;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+
+.application,
+.request,
+.application-hot,
+.profile-edit,
+.personal-account,
+.meters {
+    display: none;
+}
+
+#check_label-1:checked~.account__content .application {
+    display: block;
+}
+
+#check_label-2:checked~.account__content .request {
+    display: block;
+}
+
+#check_label-3:checked~.account__content .profile-edit {
+    display: block;
+}
+
+#check_label-4:checked~.account__content .personal-account {
+    display: block;
+}
+
+#check_label-5:checked~.account__content .meters {
+    display: block;
+}
+
+.tab-input {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.account__tabs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.tab-item {
+    padding: 10px;
+    background: white;
+    cursor: pointer;
+    display: inline-flex;
+    padding: 15px;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.tab-item:hover {
+    background-color: #8fb6c9;
+}
+
+
+#check_label-3:checked~.account__tabs .tab-item:nth-child(1),
+#check_label-1:checked~.account__tabs .tab-item:nth-child(2),
+#check_label-2:checked~.account__tabs .tab-item:nth-child(3),
+#check_label-4:checked~.account__tabs .tab-item:nth-child(4),
+#check_label-5:checked~.account__tabs .tab-item:nth-child(5) {
+    background-color: #67b0d1;
+    color: white;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.user {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.user__data-name {
+    font-size: 30px;
+    color: #67b0d1;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.user__data-type {
+    font-size: 20px;
+    color: #656565;
+    font-weight: 500;
+}
+
+.user__logout-btn {
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 600;
+    background: #c72121;
+    border-radius: 15px;
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    transition: all 0.3s;
+}
+
+.user__logout-btn:hover {
+    cursor: pointer;
+    background: #8b0909;
+}
+
+.table__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.table__row--header {
+    border-bottom: 1px solid gray;
+}
+
+.application__table-row {
+    display: grid;
+    grid-template-columns: minmax(min-content, 100px) 1fr 1fr 1fr;
+    background: rgb(240, 240, 240);
+}
+
+.application__table-row--header {
+    background: rgb(224, 224, 224);
+    padding: 10px;
+}
+
+.application__table-cell--header {
+    font-weight: 600;
+}
+
+.application__table-cell {
+    padding: 10px;
+
+}
+
+.application__table-row:hover {
+    cursor: pointer;
+    background: rgb(224, 224, 224);
+}
+
+.form__file {
+    margin-bottom: 20px;
+}
+
+.form__message {
+    margin-bottom: 20px;
+}
+
+#id_request_message {
+    padding: 5px;
+}
+
+
+.profile-form {
+    position: relative;
+    padding: 15px 0 0 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    border-top: 1px solid rgb(0, 0, 0);
+}
+
+.profile-form::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    bottom: 56px;
+}
+
+.profile-form__fields>label {
+    font-weight: 600;
+    font-size: 15px;
+    color: #264653;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.profile-form__fields>input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e0e4ea;
+    border-radius: 10px;
+    font-size: 15px;
+    background: #fafbfc;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.profile-form__fields>input:hover {
+    cursor: pointer;
+    border-color: #67b0d1;
+    box-shadow: 0 0 0 3px rgba(103,176,209,0.2);
+}
+
+.profile-form__fields>input:focus {
+    border-color: #67b0d1;
+    box-shadow: 0 0 0 3px rgba(103,176,209,0.2);
+    outline: none;
+    background: #fff;
+}
+
+.profile-form__password,
+.form__container-btn-request,
+.personal-account-block__btn {
+    text-decoration: none;
+    border: none;
+    font-weight: 600;
+    background: #548faa;
+    border-radius: 15px;
+    padding: 10px 15px;
+    color: white;
+    transition: all 0.3s;
+}
+
+.profile-form__password:hover,
+.form__container-btn-request:hover,
+.personal-account-block__btn:hover {
+    background-color: var(--charcoal);
+    color: white;
+    cursor: pointer;
+}
+
+.profile-form__btn {
+    text-decoration: none;
+    font-weight: 600;
+    background: var(--persian-green);
+    border-radius: 15px;
+    padding: 10px 15px;
+    color: white;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    width: fit-content;
+    font-size: 16px;
+    line-height: 1.42857143;
+}
+
+.profile-form__btn:hover {
+    background: #1b635a;
+}
+
+.meters__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.meters__table th,
+.meters__table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.meters__table th {
+    background-color: var(--charcoal);
+    color: white;
+}
+
+.meters__empty {
+    background: #f9f9f9;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.meter-form {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.meter-form p {
+    margin-bottom: 15px;
+}
+
+.meter-form label {
+    font-weight: 600;
+    font-size: 15px;
+    color: #264653;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.meter-form input,
+.meter-form select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e0e4ea;
+    border-radius: 10px;
+    font-size: 15px;
+    background: #fafbfc;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.meter-form input:hover,
+.meter-form select:hover {
+    cursor: pointer;
+    border-color: #67b0d1;
+    box-shadow: 0 0 0 3px rgba(103, 176, 209, 0.2);
+}
+
+.meter-form input:focus,
+.meter-form select:focus {
+    cursor: pointer;
+    border-color: #67b0d1;
+    box-shadow: 0 0 0 3px rgba(103, 176, 209, 0.2);
+    outline: none;
+    background: #fff;
+    
+}
+
+.meter-form select, 
+.meter-form select:focus {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    width: 100%;
+    padding: 12px 40px 12px 16px; 
+    border: 2px solid #e0e4ea;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #fafbfc;
+    color: #264653;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667b8a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 12px;
+}
+
+.meter-form option {
+    font-size: 15px;
+    background-color: #fafbfc;
+    color: #264653;
+    padding: 10px;
+}
+
+.meters__add-btn {
+    text-decoration: none;
+    font-weight: 600;
+    background: var(--persian-green);
+    border-radius: 15px;
+    padding: 10px 15px;
+    color: white;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    width: fit-content;
+    font-size: 16px;
+    line-height: 1.42857143;
+    margin-top: 10px;
+}
+
+.meters__add-btn:hover {
+    background: var(--charcoal);
+}
+
+.info-message {
+    background: #eef6fc;
+    border-left: 4px solid var(--blue);
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 20px 0;
+    color: #2c5778;
+    font-weight: 500;
+}
+
+.reading-disabled {
+    color: #aaa;
+    font-style: italic;
+    cursor: not-allowed;
+}
+
+/* Лицевой счёт */
+.balance-block {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.balance-label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+}
+.balance-value {
+    font-size: 36px;
+    font-weight: bold;
+}
+.negative {
+    color: var(--burnt-sienna);
+}
+.positive {
+    color: var(--persian-green);
+}
+.payment-block {
+    margin-bottom: 30px;
+}
+.payment-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+}
+.payment-field {
+    flex: 1;
+}
+.payment-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.payment-field input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+.history-block h3 {
+    margin-bottom: 15px;
+}
+
+.account-selector {
+    margin-bottom: 20px;
+}
+.account-selector label {
+    font-weight: 600;
+    margin-right: 10px;
+}
+.account-selector select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+#id_applicant_type{
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Контейнер формы (основной и скрытый) */
+#accountRequestMainForm,
+#accountRequestHiddenForm {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    margin-top: 20px;
+    border: 1px solid #eef0f5;
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* Поля формы */
+#accountRequestMainForm .form-field,
+#accountRequestHiddenForm .form-field {
+    margin-bottom: 20px;
+}
+
+/* Метки */
+#accountRequestMainForm .form-field label,
+#accountRequestHiddenForm .form-field label {
+    font-weight: 600;
+    font-size: 15px;
+    color: #264653;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Все текстовые поля, селекты, загрузка файлов */
+#accountRequestMainForm .form-field input[type="text"],
+#accountRequestMainForm .form-field input[type="number"],
+#accountRequestMainForm .form-field input[type="file"],
+#accountRequestMainForm .form-field select,
+#accountRequestMainForm .form-field textarea,
+#accountRequestHiddenForm .form-field input[type="text"],
+#accountRequestHiddenForm .form-field input[type="number"],
+#accountRequestHiddenForm .form-field input[type="file"],
+#accountRequestHiddenForm .form-field select,
+#accountRequestHiddenForm .form-field textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e0e4ea;
+    border-radius: 10px;
+    font-size: 15px;
+    background: #fafbfc;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Фокус */
+#accountRequestMainForm .form-field input:focus,
+#accountRequestMainForm .form-field select:focus,
+#accountRequestMainForm .form-field textarea:focus,
+#accountRequestHiddenForm .form-field input:focus,
+#accountRequestHiddenForm .form-field select:focus,
+#accountRequestHiddenForm .form-field textarea:focus {
+    border-color: #67b0d1;
+    box-shadow: 0 0 0 3px rgba(103,176,209,0.2);
+    outline: none;
+    background: #fff;
+}
+
+#accountRequestMainForm .form-field input:hover,
+#accountRequestMainForm .form-field select:hover,
+#accountRequestMainForm .form-field textarea:hover,
+#accountRequestHiddenForm .form-field input:hover,
+#accountRequestHiddenForm .form-field select:hover,
+#accountRequestHiddenForm .form-field textarea:hover {
+    cursor: pointer;
+    border-color: #67b0d1;
+    box-shadow: 0 0 0 3px rgba(103,176,209,0.2);
+}
+
+/* ===== Стилизованные Radio-кнопки (карточки) ===== */
+#accountRequestMainForm .radio-group,
+#accountRequestHiddenForm .radio-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 10px 0;
+}
+
+#accountRequestMainForm .radio-group label,
+#accountRequestHiddenForm .radio-group label {
+    position: relative;
+    padding-left: 42px;          /* место под кастомный индикатор */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid #e0e4ea;
+    border-radius: 10px;
+    padding: 10px 18px 10px 42px;
+    background: #fff;
+    transition: all 0.3s;
+    font-weight: 500;
+    color: #264653;
+}
+
+/* Прячем стандартный radio-input, но оставляем его функциональность */
+#accountRequestMainForm .radio-group input[type="radio"],
+#accountRequestHiddenForm .radio-group input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Псевдоэлемент – кружок слева */
+#accountRequestMainForm .radio-group label::before,
+#accountRequestHiddenForm .radio-group label::before {
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #c0c8d0;
+    border-radius: 50%;
+    background: #fff;
+    transition: all 0.3s;
+}
+
+/* Состояние hover */
+#accountRequestMainForm .radio-group label:hover,
+#accountRequestHiddenForm .radio-group label:hover {
+    border-color: #67b0d1;
+}
+
+/* Выбранный вариант – меняем кружок */
+#accountRequestMainForm .radio-group label:has(input:checked)::before,
+#accountRequestHiddenForm .radio-group label:has(input:checked)::before {
+    border-color: #67b0d1;
+    background: #67b0d1;
+    box-shadow: inset 0 0 0 4px #fff;
+}
+
+/* Выбранный вариант – меняем всю карточку */
+#accountRequestMainForm .radio-group label:has(input:checked),
+#accountRequestHiddenForm .radio-group label:has(input:checked) {
+    border-color: #67b0d1;
+    background: #f0f8fc;
+    color: #1e5a6e;
+    font-weight: 600;
+}
+
+/* Блок для юридических лиц */
+#accountRequestMainForm .legal-fields-block,
+#accountRequestHiddenForm .legal-fields-block {
+    background: #f9fafc;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border-left: 5px solid #67b0d1;
+    display: none; /* будет показано через JS */
+}
+
+/* Кнопки */
+#accountRequestMainForm .profile-form__btn,
+#accountRequestHiddenForm .profile-form__btn {
+    margin-top: 15px;
+    font-weight: 600;
+    background: var(--persian-green);
+    border-radius: 12px;
+    padding: 12px 24px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+#accountRequestMainForm .profile-form__btn:hover,
+#accountRequestHiddenForm .profile-form__btn:hover {
+    background: #1b635a;
+}
+
+/* --- Стилизация элементов внутри таблицы приборов --- */
+
+.meters__list {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Форма подачи показаний — вертикальное расположение */
+.reading-form {
+    display: flex;
+    flex-direction: column;      
+    align-items: center;     
+    gap: 6px;                    
+}
+
+
+.reading-form .meter-reading-input {
+    width: 100%;                
+}
+
+/* Поле ввода показаний */
+.meter-reading-input {
+    width: 90px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
+
+.meter-reading-input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 2px rgba(103, 176, 209, 0.2);
+    outline: none;
+}
+
+/* Кнопка "Передать" */
+.btn-small {
+    background: var(--blue);
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;          /* ← немного увеличенный паддинг */
+    color: white;
+    font-size: 16px;            /* ← чуть крупнее шрифт */
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+    white-space: nowrap;
+}
+
+.btn-small:hover {
+    background: #549bb3;
+}
+
+.btn-small:active {
+    transform: scale(0.96);
+}
+
+/* Кнопка "История" */
+.btn-history {
+    background: var(--charcoal);
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.btn-history:hover {
+    background: #1d3a44;
+}
+
+/* Кнопка "Деактивировать" */
+.btn-deactivate {
+    background: transparent;
+    border: 1px solid var(--burnt-sienna);
+    border-radius: 6px;
+    padding: 5px 10px;
+    color: var(--burnt-sienna);
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.btn-deactivate:hover {
+    background: var(--burnt-sienna);
+    color: white;
+}
+
+/* Контейнер для кнопок действий */
+.actions-cell {
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+}
+
+@media (max-width: 425px) {
+    .profile-form__fields>label {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 475px) {
+    .profile-form__fields>input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1023px) {
+    .user {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 1310px) {
+    .account__inner {
+        margin: 0 10px;
+    }
+}

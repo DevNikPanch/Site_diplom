@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <!-- my style -->
+        <link rel="stylesheet" href="{% static 'css/normalize.css'%}" type="text/css " />
+        <link rel="stylesheet" href="{% static 'css/stylesheet.css'%}" type="text/css" />
+        <link rel="stylesheet" href="{% static 'css/header/block-header.css'%}" type="text/css" />
+        <link rel="stylesheet" href="{% static 'css/footer/block-footer.css'%}" type="text/css" />
+        {% block assets_header %} {% endblock %}
+        <!--JS files-->
+        <title>{% block title %}Мой сайт {% endblock %}</title>
+    </head>
+
+    <body>
+        <header class="header" id="main">
+            <div class="header__container">
+                <div class="header__icon">
+                    <img src="{% static 'images/no_icon.jpg' %}" alt="" />
+                </div>
+                <div class="header__title">
+                    <a class="header__title-link" href="/">УМУП Ульяновскводоканал</a>
+                </div>
+
+                <div class="menu-burger">
+                    <input id="menu-toggle" type="checkbox" />
+                    <label class="menu-button" for="menu-toggle">
+                        <span></span>
+                    </label>
+                    <ul class="menu-box">
+                        {% for item in menu_items %}
+                        <li>
+                            <a class="menu-item" href="{{item.menu_url}}">{{item.menu_text}} </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <ul class="header__links">
+                    {% for item in menu_items %}
+                    <li class="header__links-item">
+                        <a class="links" href="{{item.menu_url}}">{{item.menu_text}} </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </header>
+        {% block content %} {% endblock %}
+        <footer class="footer">
+            <div class="footer__container">
+                <div class="footer__down">
+                    <div class="footer__down-text">УМУП Ульяновскводоканал с 2014 г.</div>
+                    <div class="footer__down-text">
+                        Единая диспетчерская служба: +7 (8422) 27-13-65
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

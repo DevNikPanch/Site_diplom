@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: joldi
+      POSTGRES_PASSWORD: 123
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  web: 
+    build:
+      context: .
+      target: dev-envs
+    ports: 
+      - '8000:8000'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

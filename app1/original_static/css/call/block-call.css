@@ -1,0 +1,64 @@
+.call {
+    background-size: cover;
+}
+
+.call__container {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.call__title {
+    font-family: "Raleway", sans-serif;
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.call__text {
+    margin: 0 auto;
+    color: #fff;
+    font-size: 17px;
+    margin-top: 0;
+    margin-bottom: 16px;
+    line-height: 1.5;
+    max-width: 360px;
+}
+
+.call__button {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 28px;
+    border-radius: 25px;
+    transition: 0.5s;
+    margin-top: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+    text-decoration: none;
+}
+
+.call__button:hover {
+    border: 2px solid white;
+}
+
+@media screen and (min-width: 768px) {
+    .call__text {
+        margin: 0 auto;
+        margin: 0 20px;
+        max-width: 100%;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .call__container {
+        max-width: 1320px;
+        margin: 0 auto;
+    }
+    .call__button {
+        margin-top: 20px;
+    }
+}

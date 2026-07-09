@@ -1,0 +1,525 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block assets_header %}
+<link rel="stylesheet" href="{% static 'css/account/block-account.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="account">
+    <div class="container">
+        <div class="account__inner">
+            <div class="user">
+                <div class="user__inner">
+                    <div class="user__name">
+                        {% if user.profile.full_name %}
+                            {{ user.profile.full_name }}
+                        {% else %}
+                            {{ data.client.client_name }}
+                        {% endif %}
+                    </div>
+                    <div class="user__type">
+                        {{ user.email }}
+                    </div>
+                </div>
+                <div class="user__logout">
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="user__logout-btn">Выйти</button>
+                    </form>
+                </div>
+            </div>
+
+            {# Радио-кнопки для вкладок #}
+            <input type="radio" name="radio" class="tab-input" id="check_label-1" {% if active_tab == '1' %}checked{% endif %}>
+            <input type="radio" name="radio" class="tab-input" id="check_label-2" {% if active_tab == '2' %}checked{% endif %}>
+            <input type="radio" name="radio" class="tab-input" id="check_label-3" {% if active_tab == '3' %}checked{% endif %}>
+            <input type="radio" name="radio" class="tab-input" id="check_label-4" {% if active_tab == '4' %}checked{% endif %}>
+            <input type="radio" name="radio" class="tab-input" id="check_label-5" {% if active_tab == '5' %}checked{% endif %}>
+
+            <div class="account__tabs">
+                <label class="tab-item" for="check_label-3">Данные аккаунта</label>
+                <label class="tab-item" for="check_label-1">Ваши заявки</label>
+                <label class="tab-item" for="check_label-2">Подача заявки</label>
+                <label class="tab-item" for="check_label-4">Лицевой счёт</label>
+                <label class="tab-item" for="check_label-5">Приборы учёта</label>
+            </div>
+
+            <div class="account__content">
+                <!-- Данные аккаунта -->
+                <div class="profile-edit">
+                    <div class="container__title">Данные аккаунта</div>
+                    <div class="container__text">Здесь вы можете изменить свои учётные данные.</div>
+                    <form method="post" class="profile-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="edit_profile" value="1">
+
+                        <div class="profile-form__fields">
+                            {{ profile_form.email.label_tag }}
+                            {{ profile_form.email }}
+                            {{ profile_form.email.errors }}
+                        </div>
+
+                        <div class="profile-form__fields">
+                            {{ profile_form.full_name.label_tag }}
+                            {{ profile_form.full_name }}
+                            {{ profile_form.full_name.errors }}
+                        </div>
+
+                        <div class="profile-form__fields">
+                            {{ profile_form.phone_number.label_tag }}
+                            {{ profile_form.phone_number }}
+                            {{ profile_form.phone_number.errors }}
+                        </div>
+                        <p>
+                            <a class="profile-form__password" href="{% url 'password_change' %}">Сменить пароль</a>
+                        </p>
+                        <button type="submit" class="profile-form__btn">Сохранить изменения</button>
+                    </form>
+                </div>
+
+                <!-- Ваши заявки -->
+                <div class="application">
+                    <div class="container__title">Ваши заявки</div>
+                    <div class="container__text">
+                        Здесь представлены все ваши заявки и их статусы. Если вы хотите
+                        отправить новую заявку, то заполните форму.
+                    </div>
+                    <div class="application__table">
+                        <div class="application__table-row application__table-row--header">
+                            <div class="application__table-cell--header">№</div>
+                            <div class="application__table-cell--header">Тип</div>
+                            <div class="application__table-cell--header">Статус</div>
+                            <div class="application__table-cell--header">Дата создания</div>
+                        </div>
+
+                        {% for request_user in data.requests_user %}
+                        <div class="application__table-row">
+                            <div class="application__table-cell">{{ request_user.id }}</div>
+                            <div class="application__table-cell">{{ request_user.get_type_request_display }}</div>
+                            <div class="application__table-cell">{{ request_user.get_type_status_display }}</div>
+                            <div class="application__table-cell">{{ request_user.date }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Подача заявки -->
+                <div class="request">
+                    <div class="container__title">Подача новой заявки</div>
+                    <div class="container__text">
+                        Информация о принятии заявления и присвоении номера заявки поступит на
+                        e-mail адрес Заявителя, указанный в заполняемой форме. Заявитель будет оповещен о готовности
+                        исполнения заявки. Информацию о статусе исполнения заявки можно наблюдать на почте.
+                    </div>
+                    <form class="form" method="POST" enctype="multipart/form-data" action="{% url 'home:send_request' %}">
+                        {% csrf_token %}
+                        <div class="form__text">Тип заявки:</div>
+
+                        {% for radio in form.type_request %}
+                            {{ radio.tag }}
+                            <label class="label-class" for="{{ radio.id_for_label }}">
+                                {{ radio.choice_label }}
+                            </label>
+                        {% endfor %}
+
+                        <div class="form__text-one">
+                            <p class="form__text-p1">Заявление, подаваемое на получение технических условий должно содержать информацию согласно <a class="form__text-link" href="http://xn--80aaeak8acdhmgfdb4b1a8m4b.xn--p1ai/images/doc/1455792093_postanovlenie-83.rtf" download>Постановлению №83 от 13.02.2006.</a></p>
+                            <p class="form__text-p2">Форму заявления с примером заполнения можно скачать <a class="form__text-link" href="http://xn--80aaeak8acdhmgfdb4b1a8m4b.xn--p1ai/images/doc/1526898620_Zayavlenie_na_TU.doc" download>здесь</a>.</p>
+                            <p class="form__text-p3">Заявление должно иметь вид отсканированного бумажного оригинала, содержащего подпись Заявителя. К заявлению также прикрепляются отсканированные копии сопутствующих документов, перечень которых регламентируется вышеуказанным Постановлением.</p>
+                        </div>
+                        <div class="form__text-two">
+                            <p class="form__text-p1">Заявление, подаваемое на подготовку договора о подключении к сетям водоснабжения и(или) водоотведения должно иметь вид отсканированного бумажного оригинала, содержащего подпись Заявителя.</p>
+                            <p class="form__text-p2">Форму заявления с примером заполнения можно скачать <a class="form__text-link" href="http://xn--80aaeak8acdhmgfdb4b1a8m4b.xn--p1ai/images/doc/1526898607_Zayavlenie_na_Dogovor.doc" download>здесь</a>.</p>
+                            <p class="form__text-p3">Заявление должно иметь вид отсканированного бумажного оригинала, содержащего подпись Заявителя.</p>
+                        </div>
+                        <div class="form__container">
+                            <div class="form__file">
+                                {{ form.request_file }}
+                            </div>
+                            <div class="form__message">
+                                {{ form.request_message }}
+                            </div>
+                            <button class="form__container-btn-request" type="submit">Отправить</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Лицевой счёт -->
+                <div class="personal-account">
+                    <div class="container__title">Лицевой счёт</div>
+
+                    {% if has_account %}
+                        <!-- Выбор лицевого счета -->
+                        <div class="account-selector">
+                            <label for="account_switch">Выберите лицевой счёт:</label>
+                            <select id="account_switch" onchange="location.href='?tab=4&account_id='+this.value;">
+                                {% for acc in active_accounts %}
+                                    <option value="{{ acc.id }}" {% if acc.id == selected_account_id %}selected{% endif %}>
+                                        ЛС №{{ acc.account_number }} - {{ acc.address|default:"Адрес не указан" }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        {% if personal_account %}
+                            <!-- Баланс выбранного счета -->
+                            <div class="balance-block">
+                                <div class="balance-label">Лицевой счёт № {{ personal_account.account_number }}</div>
+                                <div class="balance-label">{{ personal_account.address }}</div>
+                                <div class="balance-value {% if personal_account.balance > 0 %}negative{% else %}positive{% endif %}">
+                                    {{ personal_account.balance }} руб.
+                                </div>
+                            </div>
+
+                            {% if pending_request %}
+                                <div class="info-message">
+                                    ⏳ Заявка на открытие нового счета находится на рассмотрении.
+                                </div>
+                            {% endif %}
+
+                            <!-- Оплата -->
+                            <div class="payment-block">
+                                <h3>Пополнить счёт</h3>
+                                <form method="post" class="payment-form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="make_payment" value="1">
+                                    <div class="payment-field">
+                                        {{ payment_form.amount.label_tag }}
+                                        {{ payment_form.amount }}
+                                    </div>
+                                    <button type="submit" class="personal-account-block__btn">Оплатить</button>
+                                </form>
+                            </div>
+
+                            <!-- История начислений -->
+                            <div class="history-block">
+                                <h3>Последние начисления</h3>
+                                {% if readings %}
+                                    <table class="meters__table">
+                                        <thead><tr><th>Дата</th><th>Прибор</th><th>Расход (м³)</th><th>Сумма (руб.)</th></tr></thead>
+                                        <tbody>
+                                            {% for reading in readings %}
+                                            <tr>
+                                                <td>{{ reading.submitted_at|date:"d.m.Y" }}</td>
+                                                <td>{{ reading.device.device_number }} ({{ reading.device.get_service_type_display }})</td>
+                                                <td>{{ reading.consumption }}</td>
+                                                <td>{{ reading.amount_due }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <p>Начислений пока нет.</p>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
+                        <!-- Кнопка и скрытая форма для нового счета -->
+                        <div class="personal-account-block">
+                            <button id="showNewAccountFormBtn" class="personal-account-block__btn">Открыть новый лицевой счёт</button>
+                            <div id="newAccountFormContainer" style="display: none; margin-top: 20px;">
+                                <h3>Заявление на открытие нового лицевого счета</h3>
+                                <form method="post" enctype="multipart/form-data" class="profile-form-request" id="accountRequestHiddenForm">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="submit_account_request" value="1">
+
+                                    <!-- Тип заявителя -->
+                                    <div class="form-field">
+                                        {{ account_request_form.applicant_type.label_tag }}
+                                        {{ account_request_form.applicant_type }}
+                                    </div>
+
+                                    <!-- Общие поля для обоих типов -->
+                                    <div class="form-field">
+                                        {{ account_request_form.full_name.label_tag }}
+                                        {{ account_request_form.full_name }}
+                                    </div>
+                                    <div class="form-field">
+                                        {{ account_request_form.phone.label_tag }}
+                                        {{ account_request_form.phone }}
+                                    </div>
+                                    <div class="form-field">
+                                        {{ account_request_form.address.label_tag }}
+                                        {{ account_request_form.address }}
+                                    </div>
+
+                                    <!-- Поля только для юридического лица (изначально скрыты) -->
+                                    <div class="legal-fields-block" style="display: none;">
+                                        <div class="form-field">
+                                            {{ account_request_form.company_name.label_tag }}
+                                            {{ account_request_form.company_name }}
+                                        </div>
+                                        <div class="form-field">
+                                            {{ account_request_form.inn.label_tag }}
+                                            {{ account_request_form.inn }}
+                                        </div>
+                                        <div class="form-field">
+                                            {{ account_request_form.kpp.label_tag }}
+                                            {{ account_request_form.kpp }}
+                                        </div>
+                                        <div class="form-field">
+                                            {{ account_request_form.manager_position.label_tag }}
+                                            {{ account_request_form.manager_position }}
+                                        </div>
+                                    </div>
+
+                                    <!-- Поля документов -->
+                                    <div class="form-field">
+                                        {{ account_request_form.ownership_document.label_tag }}
+                                        {{ account_request_form.ownership_document }}
+                                    </div>
+                                    <div class="form-field">
+                                        {{ account_request_form.passport_copy.label_tag }}
+                                        {{ account_request_form.passport_copy }}
+                                    </div>
+                                    <div class="form-field">
+                                        {{ account_request_form.snils_copy.label_tag }}
+                                        {{ account_request_form.snils_copy }}
+                                    </div>
+                                    <div class="form-field">
+                                        {{ account_request_form.meter_documents.label_tag }}
+                                        {{ account_request_form.meter_documents }}
+                                    </div>
+
+                                    <button type="submit" class="profile-form__btn">Отправить заявку</button>
+                                </form>
+                            </div>
+                        </div>
+
+                    {% elif pending_request %}
+                        <!-- Заявка на рассмотрении -->
+                        <div class="meters__empty">
+                            <p>⏳ Заявка на открытие лицевого счета находится на рассмотрении.</p>
+                            <p>Дата подачи: {{ pending_request.created_at|date:"d.m.Y H:i" }}</p>
+                        </div>
+
+                    {% else %}
+                        <!-- Форма подачи заявки (нет счетов) -->
+                        <div class="container__text">Для открытия лицевого счета подайте заявку.</div>
+                        <form method="post" enctype="multipart/form-data" class="profile-form" id="accountRequestMainForm">
+                            {% csrf_token %}
+                            <input type="hidden" name="submit_account_request" value="1">
+
+                            <!-- Тип заявителя -->
+                            <div class="form-field">
+                                <label class="field-label">Тип заявителя</label>
+                                <div class="radio-group">
+                                    {{ account_request_form.applicant_type }}
+                                </div>
+                            </div>
+
+                            <!-- Общие поля для обоих типов -->
+                            <div class="form-field">
+                                {{ account_request_form.full_name.label_tag }}
+                                {{ account_request_form.full_name }}
+                            </div>
+                            <div class="form-field">
+                                {{ account_request_form.phone.label_tag }}
+                                {{ account_request_form.phone }}
+                            </div>
+                            <div class="form-field">
+                                {{ account_request_form.address.label_tag }}
+                                {{ account_request_form.address }}
+                            </div>
+
+                            <!-- Поля только для юридического лица (изначально скрыты) -->
+                            <div class="legal-fields-block" style="display: none;">
+                                <div class="form-field">
+                                    {{ account_request_form.company_name.label_tag }}
+                                    {{ account_request_form.company_name }}
+                                </div>
+                                <div class="form-field">
+                                    {{ account_request_form.inn.label_tag }}
+                                    {{ account_request_form.inn }}
+                                </div>
+                                <div class="form-field">
+                                    {{ account_request_form.kpp.label_tag }}
+                                    {{ account_request_form.kpp }}
+                                </div>
+                                <div class="form-field">
+                                    {{ account_request_form.manager_position.label_tag }}
+                                    {{ account_request_form.manager_position }}
+                                </div>
+                            </div>
+
+                            <!-- Поля документов -->
+                            <div class="form-field">
+                                {{ account_request_form.ownership_document.label_tag }}
+                                {{ account_request_form.ownership_document }}
+                            </div>
+                            <div class="form-field">
+                                {{ account_request_form.passport_copy.label_tag }}
+                                {{ account_request_form.passport_copy }}
+                            </div>
+                            <div class="form-field">
+                                {{ account_request_form.snils_copy.label_tag }}
+                                {{ account_request_form.snils_copy }}
+                            </div>
+                            <div class="form-field">
+                                {{ account_request_form.meter_documents.label_tag }}
+                                {{ account_request_form.meter_documents }}
+                            </div>
+
+                            <button type="submit" class="profile-form__btn">Отправить заявку</button>
+                        </form>
+                    {% endif %}
+                </div>
+                <!-- Приборы учёта -->
+                <div class="meters">
+                    <div class="container__title">Приборы учёта</div>
+                    <div class="container__text">Управление вашими приборами учёта и показаниями.</div>
+
+                    {% if not has_account %}
+                        <div class="meters__empty">
+                            <p>⚠️ У вас пока нет открытого лицевого счёта.</p>
+                            <p>Для добавления приборов учёта необходимо подать заявку на открытие лицевого счёта в разделе «Лицевой счёт».</p>
+                        </div>
+                    {% else %}
+                        {% if meters_with_status %}
+                            <div class="meters__list">
+                                <table class="meters__table">
+                                    <!-- шапка таблицы -->
+                                    <thead>
+                                        <tr>
+                                            <th>Номер прибора</th>
+                                            <th>Лицевой счёт</th>
+                                            <th>Тип услуги</th>
+                                            <th class="col-prev-reading">Прошлые показания</th>
+                                            <th class="col-new-reading">Новое показание</th>
+                                            <th class="col-verification-date">Дата поверки</th>
+                                            <th class="col-actions">Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in meters_with_status %}
+                                            {% with meter=item.meter %}
+                                            <tr>
+                                                <td>{{ meter.device_number }}</td>
+                                                <td>
+                                                    {% if meter.account %}
+                                                        <a href="?tab=4&account_id={{ meter.account.id }}" title="Перейти к счёту">{{ meter.account.account_number }}</a>
+                                                    {% else %}
+                                                        <span style="color: #999;">—</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td>{{ meter.get_service_type_display }}</td>
+                                                <td>
+                                                    {% with last=meter.get_last_reading %}
+                                                        {% if last %}
+                                                            {{ last.current_reading }} <br>
+                                                            <small style="color: #666;">{{ last.submitted_at|date:"d.m.Y" }}</small>
+                                                        {% else %}
+                                                            <span style="color: #999;">Нет данных</span>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                </td>
+                                                <td>
+                                                    {% if item.can_submit %}
+                                                        <form method="post" action="{% url 'home:submit_reading' meter.id %}" class="reading-form">
+                                                            {% csrf_token %}
+                                                            <input type="number" name="current_reading" min="0" step="1" required 
+                                                            class="meter-reading-input">
+                                                            <button type="submit" class="btn-small">Передать</button>
+                                                        </form>
+                                                    {% else %}
+                                                        {% if not is_reading_period %}
+                                                            <span class="reading-disabled">Приём закрыт</span>
+                                                        {% elif item.has_submitted %}
+                                                            <span class="reading-disabled">Показания переданы</span>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </td>
+                                                <td>{{ meter.verification_date|default:"—" }}</td>
+                                                <td>
+                                                    <div class="actions-cell">
+                                                        <a href="{% url 'home:meter_history' meter.id %}" class="btn-history">История</a>
+                                                        {% if meter.is_active %}
+                                                        <form method="post" action="{% url 'home:deactivate_meter' meter.id %}" style="display:inline;">
+                                                            {% csrf_token %}
+                                                            <button type="submit" class="btn-deactivate" onclick="return confirm('Деактивировать прибор?');">Деактивировать</button>
+                                                        </form>
+                                                        {% endif %}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endwith %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <div class="meters__empty">
+                                <p>У вас пока нет добавленных приборов учёта.</p>
+                            </div>
+                        {% endif %}
+
+                        {% if has_account %}
+                            <div class="meters__add">
+                                <h3>Добавить новый прибор</h3>
+                                <form method="post" class="meter-form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="add_meter" value="1">
+                                    {{ meter_form.as_p }}
+                                    <button type="submit" class="personal-account-block__btn">Добавить прибор</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleLegalFields(radio, container) {
+        var legalDiv = container.querySelector('.legal-fields-block');
+        if (legalDiv) {
+            legalDiv.style.display = (radio.value === 'legal_entity') ? 'block' : 'none';
+        }
+    }
+
+    function setupApplicantTypeToggle(form) {
+        if (!form) return;
+        var radios = form.querySelectorAll('input[name="applicant_type"]');
+        radios.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                toggleLegalFields(this, form);
+            });
+        });
+        var checkedRadio = form.querySelector('input[name="applicant_type"]:checked');
+        if (checkedRadio) {
+            toggleLegalFields(checkedRadio, form);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var mainForm = document.getElementById('accountRequestMainForm');
+        setupApplicantTypeToggle(mainForm);
+
+        var hiddenForm = document.getElementById('accountRequestHiddenForm');
+        setupApplicantTypeToggle(hiddenForm);
+
+        var btn = document.getElementById('showNewAccountFormBtn');
+        if (btn) {
+            btn.addEventListener('click', function() {
+                var container = document.getElementById('newAccountFormContainer');
+                if (container.style.display === 'none' || container.style.display === '') {
+                    container.style.display = 'block';
+                    this.textContent = 'Скрыть форму';
+                    var hiddenRadios = hiddenForm.querySelectorAll('input[name="applicant_type"]');
+                    if (hiddenRadios.length > 0) {
+                        var checked = hiddenForm.querySelector('input[name="applicant_type"]:checked');
+                        if (checked) toggleLegalFields(checked, hiddenForm);
+                    }
+                } else {
+                    container.style.display = 'none';
+                    this.textContent = 'Открыть новый лицевой счёт';
+                }
+            });
+        }
+    });
+</script>
+
+{% endblock %}

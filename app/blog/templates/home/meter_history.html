@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block assets_header %}
+<link rel="stylesheet" href="{% static 'css/account/block-account.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="account">
+    <div class="container">
+        <div class="account__inner">
+            <div class="user">
+                <div class="user__name">{{ meter.device_number }} — {{ meter.get_service_type_display }}</div>
+                <div class="user__type">
+                    <a href="{% url 'home:account' %}?tab=5">← Вернуться к приборам учёта</a>
+                </div>
+            </div>
+
+            <div class="history">
+                <div class="container__title">История показаний</div>
+                {% if readings %}
+                    <table class="meters__table">
+                        <thead>
+                            <tr>
+                                <th>Дата подачи</th>
+                                <th>Предыдущие</th>
+                                <th>Текущие</th>
+                                <th>Расход (м³)</th>
+                                <th>Тариф (руб/м³)</th>
+                                <th>Сумма (руб)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for reading in readings %}
+                            <tr>
+                                <td>{{ reading.submitted_at|date:"d.m.Y H:i" }}</td>
+                                <td>{{ reading.previous_reading }}</td>
+                                <td>{{ reading.current_reading }}</td>
+                                <td>{{ reading.consumption }}</td>
+                                <td>{{ reading.tariff.price_per_unit }}</td>
+                                <td>{{ reading.amount_due }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="meters__empty">
+                        <p>Показания ещё не передавались.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "index.html" %}
+
+{% block title %} Новость {% endblock %}
+
+{% load static %} {% block assets_header%}
+
+<link rel="stylesheet" href="{% static 'css/articles/block-section.css' %}" type="text/css">
+
+{% endblock %}
+
+{% block content %}
+
+<div class='container'>
+    <div class="container__link"><a class="container__link-text" href="{% url 'articles:index' %}">🠔 Вернуться</a>
+    </div>
+    <div class="container__info">
+        <div class="article">
+            <img class="article__image" src="/media/{{article.article_image}}" alt="">
+            <div class="article__title">{{article.article_title}}</div>
+            <div class="article__info">
+                <span class="article__info-data">{{article.article_date}}</span>
+                <span class="divider">|</span>
+                <span class="article__info-author">{{user.username}}</span>
+            </div>
+            <div class="articles__text">
+
+                {{article.article_text}}
+
+            </div>
+        </div>
+        <div class="articles">
+            <div class="articles__container">
+                <div class="articles__title">Похожие</div>
+                <div class="blocks">
+
+                    {% for item in similar_articles %}
+                    <div class="block">
+                        <div class="block__title">{{item.article_title}}</div>
+                        <div class="block__info">
+                            <span class="block__info-data">{{item.article_date}}</span>
+                            <a href="{% url 'articles:section' item.id %}" class="block__info-link">Читать статью ➝</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comments">
+        <div class="comments__title">Отправить комментарий</div>
+
+        <form method="post" action="{% url 'articles:add_comment' article.id %}" class="comments__forms">
+            {% csrf_token %}
+            <textarea class="comments__forms-comment" name="comment" placeholder="Комментарий" required></textarea>
+            <div class="comments__forms-info">
+                <input class="comments__forms-name" type="text" name="name" placeholder="Имя" required>
+                <input class="comments__forms-email" type="email" name="email" placeholder="Почта" required>
+                <label style="margin-left: 10px;">
+                    <input type="checkbox" name="is_question"> Это вопрос?
+                </label>
+                <button class="comments__forms-button" type="submit">Отправить комментарий</button>
+            </div>
+        </form>
+    </div>
+
+    {% for comment in comments %}
+    <div class="comments__item">
+        <div class='comments__block'>
+            <div class='comments__item-info'>
+                <div
+                    style="background-color: {{comment.icon_color}}; border-radius: 50%; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center;">
+                    {{comment.comment_name|first}}</div>
+                <div class='comments__item-mobile'>
+                    <div class='comments__item-name'>{{comment.comment_name}}</div>
+                    <div class='comments__item-email'>{{comment.comment_email}}</div>
+                </div>
+            </div>
+            <div class='comments__item-block'>
+                <div class='comments__item-date'>{{comment.comment_date}}</div>
+            </div>
+        </div>
+        <div class='comments__item-text'>{{comment.comment_text}}</div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

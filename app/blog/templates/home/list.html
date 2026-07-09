@@ -1,0 +1,295 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block assets_header%}
+        <!-- my style -->
+    <link rel="stylesheet" href="{% static 'css/stylesheet.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/call/block-call.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/advantages/block-advantages.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/contact/block-contact.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/footer/block-footer.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/header/block-header.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/portfolio/block-portfolio.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/services/block-services.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slider/block-slider.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/stats/block-stats.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/testimonials/block-testimonials.css'%}" type="text/css">
+
+    <!-- vendor -->
+    <link rel="stylesheet" href="{% static 'css/vendor/boxicons/css/boxicons.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/assets/vendor/bootstrap-icons/bootstrap-icons.css'%} " type="text/css">
+    <link rel="stylesheet" href="{% static 'css/normalize.css'%}" type="text/css ">
+{% endblock %}
+
+{% block title %}Сайт{% endblock %}
+
+
+{% block content %}
+<div class="wrapper">
+    <div class="wrapper__slide" id="slide1" >
+        <h1>Ульяновскводоканал</h1>
+        <p class="slide-text">Добро пожаловать на наш сайт!</p>
+    </div>
+</div>
+
+
+
+<script>
+    // задержка для смена слайдара будет у первого слайда у которого очередь меньше всех в админке. Check: slider_queue
+    const delay = {{first_slide.slider_delay}} * 1000 || 3 * 1000;
+
+    var photos = [
+        {% for slide in slides %}                           
+        "{{ slide.slider_url}}",
+        {% endfor %}
+    ];
+
+    const setBackgroundImage = (url)=>{
+        const gradient = 'linear-gradient(rgba(255,255,255,0.9), rgba(0,0,0,0.5))';
+        if(url.startsWith("https") || url.startsWith("http")){ 
+            document.querySelector("#slide1").style.backgroundImage = ` url(${url})`;
+        }else{
+            document.querySelector("#slide1").style.backgroundImage = ` url({%static ""%}${url})`;
+        }
+    }
+    setBackgroundImage(photos[0])
+    
+    var i = 1;
+    setInterval(function() {
+        if(photos[i] != null){
+            setBackgroundImage(photos[i])
+        }
+        ++i;
+        if (i >= photos.length) {
+            i = 0
+        }
+        
+    },  delay );
+
+
+</script>
+
+
+<div class="advantages" id = "advantages" style = "background: url({% static '/images/background.jpg' %}) center center no-repeat;">
+    <div class="advantages__container">
+        <div class="advantages__info">
+            <div class="advantages__info-title">Наши преимущества</div>
+            <div class="advantages__info-text"> УМУП "Ульяновскводоканал" динамично развивающееся предприятие, со стабильной ежемесячной зарплатой и предоставлением всех предусмотренных социальных гарантий для работников.</div>
+            <a class="button-about" href="">О нас<i class="bx bx-chevron-right"></i></a>
+        </div>
+        <div class="advantages__blocks">
+            <div class="advantages__block">
+                <div class="advantages__block-icon"><i class="bx bx-receipt"></i></div>
+                <div class="advantages__block-title">Юридическая безопасноть</div>
+                <div class="advantages__block-text">Наше предприятие выполняет все юридические и конфиденциальные нормы</div>
+            </div>
+            <div class="advantages__block">
+                <div class="advantages__block-icon"><i class="bx bx-cube-alt"></i></div>
+                <div class="advantages__block-title">Отчёт по работам</div>
+                <div class="advantages__block-text">На нашем сайте ведётся ежедневный блог о самых свежих новостях о наших действиях</div>
+            </div>
+            <div class="advantages__block">
+                <div class="advantages__block-icon"><i class="bx bx-images"></i></div>
+                <div class="advantages__block-title">Эффективность</div>
+                <div class="advantages__block-text">На сайте присутсвуют разделы по горячей линии и возможности отправки формы по объектам</div>
+            </div>
+            <div class="advantages__block">
+                <div class="advantages__block-icon"><i class="bx bx-shield"></i></div>
+                <div class="advantages__block-title">Гарантийная безопасноть</div>
+                <div class="advantages__block-text">Долгое время нахождения нашего предприятие говорит само за себя</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="services" id = "services">
+    <div class="services__container">
+        <div class="services__info">
+            <div class="services__info-title">Услуги</div>
+            <div class="services__info-text">"Ульяновскводоканал" занимается множеством услуг по поводу водоснабжению города и разных поселений, находящихся в регионе</div>
+        </div>
+        <div class="services__blocks">
+            <div class="services__block">
+                <div class="services__block-icon">
+                    <i class="bx bxl-dribbble"></i>
+                </div>
+                <div class="services__block-title">Расчет платы</div>
+                <div class="services__block-text">Расчет платы за услуги по водоснабжению и водоотведению с одного человека »</div>
+            </div>
+            <div class="services__block">
+                <div class="services__block-icon">
+                    <i class="bx bx-file"></i>
+                </div>
+                <div class="services__block-title">Форма договора</div>
+                <div class="services__block-text">Типовая форма договора холодного водоснабжения и водоотведения для МКД »</div>
+            </div>
+            <div class="services__block">
+                <div class="services__block-icon">
+                    <i class="bx bx-tachometer"></i>
+                </div>
+                <div class="services__block-title">Приборы учёта</div>
+                <div class="services__block-text">Порядок установки приборов учёта.</div>
+            </div>
+            <div class="services__block">
+                <div class="services__block-icon">
+                    <i class="bx bx-world"></i>
+                </div>
+                <div class="services__block-title">Подключение объектов</div>
+                <div class="services__block-text">Порядок подключения объектов к сетям водоснабжения и водоотведения</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="stats" id = "data">
+    <div class="stats__container">
+        <div class="stats__blocks">
+            <div class="stats__block">
+                <i class="bi bi-emoji-smile"></i>
+                <div class="stats__block-number">350+</div>
+                <p class="stats__block-text"><strong>Счастливых клиентов</strong> выбравших нас</p>
+            </div>
+            <div class="stats__block">
+                <i class="bi bi-journal-richtext"></i>
+                <div class="stats__block-number">600+</div>
+                <p class="stats__block-text"><strong>Выполненных проектов</strong> заключённых с нами</p>
+            </div>
+            <div class="stats__block">
+                <i class="bi bi-headset"></i>
+                <div class="stats__block-number">1 472+</div>
+                <p class="stats__block-text"><strong>Часов поддержки</strong> по горячей линии</p>
+            </div>
+            <div class="stats__block">
+                <i class="bi bi-people"></i>
+                <div class="stats__block-number">3600+</div>
+                <p class="stats__block-text"><strong>Сотрудников</strong> нашего предприятия</p>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="call" id='call' style = "background: linear-gradient(rgba(103, 176, 209, 0.8), rgba(103, 176, 209, 0.8)), url({% static '/images/background-1.jpg' %}) fixed center center">
+    <div class="call__container">
+        <div class="call__title">Горячая линия</div>
+        <p class="call__text">Если вам нужно проконсультироваться по определённым вопросам или узнать больше информаци, можете связаться по телефону горячей линии. 
+        Cотрудники Управления сбыта УМУП «Ульяновскводоканал» могут проконсультировать абонентов по телефонам: <br>Расчетно-договорной отдел 27-26-48
+<br>Отдел по расчетам с населением частных и клубных домов 27-15-85
+<br>Отдел прямых расчетов с населением многоквартирных домов 58-01-87</p>
+        <a href="tel:+78422271365" class="call__button">Позвоните нам</a>
+    </div>
+</section>
+<div class="portfolio" id = 'portfolio'>
+    <div class="portfolio__container">
+        <div class="portfolio__title">Портфолио</div>
+        <div class="portfolio__text">В данном разделе присутсвуют большинство отчётов о пределанной работе, так же здесь будут размещаться актуальный фотографии на сегодняшний момент и фотографии с мест проведения работ</div>
+        <div class="portfolio__blocks">
+            <div class="portfolio__blocks-item"><img class='portfolio__blocks-image' src="{% static 'images/portfolio-1.jpg' %}" alt=""></div>
+            <div class="portfolio__blocks-item"><img class='portfolio__blocks-image' src="{% static 'images/portfolio-2.jfif' %}" alt=""></div>
+            <div class="portfolio__blocks-item"><img class='portfolio__blocks-image' src="{% static 'images/portfolio-3.jpg' %}" alt=""></div>
+            <div class="portfolio__blocks-item"><img class='portfolio__blocks-image' src="{% static 'images/portfolio-4.jpg' %}" alt=""></div>
+        </div>
+    </div>
+</div>
+<div class="contacts" id = "contacts">
+    <div class="contact__container">
+        <div class="contact__title">Контакты</div>
+        <div class="contact__text">Наш офис находится по адресу ул.Островского, д.6, ул.Федерации, д.31, ул.Вр.Михайлова, д.31, пр-т Ульяновский, д.2. Свои обращения Вы можете направить на адрес электронной почты: mail@ulvk.ru
+</div>
+        <div class="contact__blocks">
+            <div class="contact__blocked contact-row">
+                <i class="bx bx-map"></i>
+                <div class="contact__block-title">Наш адрес</div>
+                <div class="contact__block-text">ул.Островского, д.6, г.Ульяновск</div>
+            </div>
+            <div class="contact__block">
+                <i class="bx bx-envelope"></i>
+                <div class="contact__block-title">Наша почта</div>
+                <div class="contact__block-text"><a href='mailto:mail@ulvk.ru' class='contact__block-mail'>mail@ulvk.ru</a></div>
+            </div>
+            <div class="contact__block">
+                <i class="bx bx-phone-call"></i>
+                <div class="contact__block-title">Наш телефон</div>
+                <div class="contact__block-text"><a href='tel:+78422271365' class='contact__block-phone'>+7 (8422) 27-13-65</a></div>
+            </div>
+        </div>
+        <div class="contact__info">
+            <div class="contact__map">
+                <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/-/CPg~4D7E" style="color:#eee;font-size:12px;position:absolute;top:0px;">Умуп Ульяновскводоканал</a><a href="https://yandex.ru/maps/-/CPg~4D7E"
+                        style="color:#eee;font-size:12px;position:absolute;top:14px;">Водоканал, водное хозяйство в Ульяновске</a><iframe class="map" src="https://yandex.ru/maps/-/CPg~4D7E" width="560" height="400" frameborder="1" allowfullscreen="true"
+                        style="position:relative;"></iframe></div>
+            </div>
+            <div class="contact__form">
+                <form action="{% url 'home:send_hot_request' %}" method="post" class="form">
+                    
+                    {% csrf_token %}
+                    
+                    <div class="form__inputs">
+                        <div class="form__input">
+                            <input type="text" name="name" class="form__input-view" placeholder="Ваше имя:">
+                        </div>
+                        <div class="form__input">
+                            <input type="text" name="email" class="form__input-view" placeholder="Ваша почта:">
+                        </div>
+                    </div>
+                    <div class = 'form__inputs'>
+                        <div class="form__input">
+                            <input type="text" name="address" class="form__input-view" placeholder="Адресс:">
+                        </div>
+                        <div class="form__input">
+                            <input type="text" name="subject" class="form__input-view" placeholder="Объект:">
+                        </div>
+                    </div>
+                    <div class="form__input">
+                        <textarea class="form__input-textarea" name="message" rows="5" placeholder="Ваше сообщение:"></textarea>
+                    </div>
+                    <div class="form__button">
+                        <button type="submit" class="button-submit">Отправить сообщение</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer__container">
+        <div class="footer__block">
+            <div class="footer__block-title">Ульяновскводоканал</div>
+            <div class="footer__block-text">УМУП "Ульяновскводоканал" одно из важнейших предприятий жизнеобеспечения г. Ульяновска.</div>
+            <div class="footer__block-address">ул. Островского д.6, г.Ульяновск</div>
+            <div class="footer__block-phone"><strong>Телефон:</strong> +7 (8422) 27-13-65</div>
+            <div class="footer__block-email"><strong>Почта:</strong> mail@ulvk.ru</div>
+            <div class="footer__block-icons">
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+            </div>
+        </div>
+        <div class="footer__list">
+            <div class="footer__list-title">Ссылки</div>
+            <ul class="list">
+                <li class="list__item"><i class="bx bx-chevron-right"></i><a class="list__item-link">Главная</a></li>
+                <li class="list__item"><i class="bx bx-chevron-right"></i><a class="list__item-link">О нас</a></li>
+                <li class="list__item"><i class="bx bx-chevron-right"></i><a class="list__item-link">Услуги</a></li>
+                <li class="list__item"><i class="bx bx-chevron-right"></i><a class="list__item-link">Условия обслуживания</a></li>
+                <li class="list__item"><i class="bx bx-chevron-right"></i><a class="list__item-link">Конфиденциальность</a></li>
+            </ul>
+        </div>
+        <div class="footer__list">
+            <div class="footer__list-title">Наши услуги</div>
+            <ul class="list">
+                <li class="list__item"><i class="bx bx-chevron-right"></i><a class="list__item-link">Порядок установки приборов учёта</a></li>
+                <li class="list__item"><i class="bx bx-chevron-right"></i><a class="list__item-link">Тарифы</a></li>
+                <li class="list__item"><i class="bx bx-chevron-right"></i><a class="list__item-link">Сроки подачи показаний приборов учёта</a></li>
+                <li class="list__item"><i class="bx bx-chevron-right"></i><a class="list__item-link">Порядок подключения объектов</a></li>
+                <li class="list__item"><i class="bx bx-chevron-right"></i><a class="list__item-link">Форма договора холодного водоснабжения</a></li>
+            </ul>
+        </div>
+        <div class="news">
+            <div class="news__title">Наши новости</div>
+            <div class="news__text">Следите за нашими новостями по ссылке <a class='news__text-link' href='/articles/'>здесь</a>.</div>
+        </div>
+    </div>
+</footer>
+
+
+{% endblock %}
